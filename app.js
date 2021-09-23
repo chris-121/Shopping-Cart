@@ -7,9 +7,11 @@ var hbs=require('express-handlebars')
 var userRouter = require('./routes/user');
 var adminRouter = require('./routes/admin');
 var db=require('./config/connection')
+var session=require('express-session')
 
 var app = express();
 var fileUpload=require("express-fileupload");
+const { Cookie } = require('express-session');
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -21,6 +23,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(fileUpload())
+app.use(session({secret:"yoyo",cookie:{maxAge:60000}}))
 db.connect((err)=>{
   if(err)
   console.log("error"+err)

@@ -12,16 +12,32 @@
                     <a class="nav-link" href="/">Products <span class="sr-only">(current)</span></a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Cart</a>
+                    <a class="nav-link" href="/cart">Cart</a>
                 </li>
+                {{#if user}}
                 <li class="nav-item">
                     <a class="nav-link" href="#">Orders</a>
                 </li>
+                {{/if}}
             </ul>
-            <form class="form-inline my-2 my-lg-0">
-                <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-            </form>
+            <div class="dropdown">
+  <button class="btn btn-info dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+      {{#if user}}
+        {{user.name}}
+        {{else}}
+    Login/Sign Up
+      {{/if}}
+</button>
+  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+      {{#if user}}
+    <a class="dropdown-item" href="/logout">logout</a>
+      {{else}}
+    <a class="dropdown-item" href="/login">login</a>
+    <a class="dropdown-item" href="/SignUp">Sign Up</a>
+    <a class="dropdown-item" href="/admin/login">Admin-login</a>
+    {{/if}}
+  </div>
+</div>
         </div>
     </nav>
 </header>
