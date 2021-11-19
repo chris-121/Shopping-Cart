@@ -82,4 +82,10 @@ router.get('/logout',(req,res)=>{
   req.session.admin=false
   res.redirect('/')
 })
+router.get('/all-orders',verifyLogin,async (req,res)=>{
+  let orders=await productHelpers.getUserOrders()
+  console.log(orders)
+  res.render('admin/all-orders',{orders,adminPage:true,logout:true})
+})
+
 module.exports = router;

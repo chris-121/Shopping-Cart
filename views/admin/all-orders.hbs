@@ -1,0 +1,25 @@
+<table class="table">
+  <thead>
+    <tr>
+    <th scope="col">Date</th>
+      <th scope="col">Address</th>
+      <th scope="col">pincode</th>
+      <th scope="col">Phone Number</th>
+      <th scope="col">Amount</th>
+      <th scope="col">Payment Method</th>
+      <th scope="col">status</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+      {{#each orders}}
+    <tr>
+        <td>{{this.date}}</td>
+        <td>{{this.deliveryDetails.Address}}</td>
+        <td>{{this.deliveryDetails.pincode}}</td>
+        <td>{{this.deliveryDetails.phone_Number}}</td>
+        <td>{{this.totalAmount}}</td>
+        <td>{{this.paymentMethod}}</td>
+        <td>{{this.status}}</td>
+    </tr>
+    {{/each}}
