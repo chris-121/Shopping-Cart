@@ -3,9 +3,15 @@ var collections=require('../config/collections')
 var objectId=require('mongodb').ObjectId
 module.exports={
     addProduct:(product,callback)=>{
-
-        db.get().collection("products").insertOne(product).then((data)=>{
-            callback(data.insertedId)
+        console.log(product)
+        let data={
+            pname:product.pname,
+            price:parseInt(product.price),
+            qty:product.qty
+        }
+        console.log(data)
+        db.get().collection("products").insertOne(data).then((datas)=>{
+            callback(datas.insertedId)
         })
     },
     getAllProducts:()=>{
@@ -22,7 +28,6 @@ module.exports={
         
     },
     adminLogin:(details,callback)=>{
-        console.log('hai')
         let Email="chris@gmail.com"
         let Pass='123'
         if(Email=details.email){
@@ -30,5 +35,28 @@ module.exports={
                 callback()
             }
         }   
+    },
+    getProductDetails:(ProdId)=>{
+        return new Promise((resolve,reject)=>{
+            db.get().collection(collections.PRODUCT_COLLECTION).findOne({_id:objectId(ProdId)}).then((product)=>{
+                resolve(product)
+            })
+        })
+    },
+    updateProduct:(id,content)=>{
+        return new Promise ((resolve,reject)=>{
+            db.get().collection(collections.PRODUCT_COLLECTION).updateOne({_id:objectId(id)},{
+                $set:{
+                    pname:content.pname,
+                    price:content.price,
+                    qty:content.qty
+                }
+            }).then((response)=>{
+                resolve()
+
+            })
+        })
+
+
     }
 }

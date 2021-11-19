@@ -8,10 +8,14 @@
                     <h5 class="card-title">{{this.pname}}</h5>
                     <p class="card-text">{{this.description}}</p>
                     <h5 class="card-text">Rs.{{this.price}}</h5>
-                    <a href="#" class="btn btn-primary">Add to cart</a>
+                    <button class="btn btn-primary" onClick="addToCart('{{this._id}}')">Add to Cart</button>
                 </div>
             </div>
         </div>
         {{/each}}
         </div>
 </section>
+
+<script>
+
+</script>
