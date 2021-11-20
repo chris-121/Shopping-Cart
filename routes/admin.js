@@ -84,8 +84,18 @@ router.get('/logout',(req,res)=>{
 })
 router.get('/all-orders',verifyLogin,async (req,res)=>{
   let orders=await productHelpers.getUserOrders()
-  console.log(orders)
+  //console.log(orders)
   res.render('admin/all-orders',{orders,adminPage:true,logout:true})
+})
+router.get('/vieworderedproducts/:id',verifyLogin,async(req,res)=>{
+  let products=await productHelpers.getOrderProducts(req.params.id)
+  res.render('admin/viewOrderList',{admin:req.session.admin,products,adminPage:true,logout:true})
+})
+router.post('/statusUpdate',verifyLogin,(req,res)=>{
+  console.log(req.body.id);
+  productHelpers.updateStatus(req.body.id,req.body.updatedStatus).then((response)=>{
+    res.json(response)
+  })
 })
 
 module.exports = router;

@@ -96,5 +96,18 @@ getOrderProducts:(orderId)=>{
         ]).toArray()
         resolve(orderItems)
     })
-}
+    },
+    updateStatus:(id,status)=>{
+        return new Promise((resolve,reject)=>{
+            db.get().collection(collections.ORDER_COLLECTION).updateOne({_id:objectId(id)},
+            {
+                $set:{
+                    status:status
+                }
+            }).then((response)=>{
+                resolve(response)
+            })
+        })
+
+    }
 }

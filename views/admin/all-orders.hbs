@@ -8,6 +8,8 @@
       <th scope="col">Amount</th>
       <th scope="col">Payment Method</th>
       <th scope="col">status</th>
+      <th scope="col">Products</th>
+      <th scope="col">status update</th>
       <th></th>
     </tr>
   </thead>
@@ -21,5 +23,29 @@
         <td>{{this.totalAmount}}</td>
         <td>{{this.paymentMethod}}</td>
         <td>{{this.status}}</td>
+        <td><a href="/admin/vieworderedproducts/{{this._id}} " class="btn btn-primary">View Products</a></td>
+        <td>
+          <a class="btn btn-primary" onclick="statusUpdate('shipped','{{this._id}}')">Shipped</a>
+          <a class="btn btn-success" onclick="statusUpdate('delivered','{{this._id}}')">Delivered</a>
+        </td>
     </tr>
     {{/each}}
+
+<script>
+  function statusUpdate(status,orderId){
+    $.ajax({
+        url:'/admin/statusUpdate',
+        data:{
+          updatedStatus:status,
+          id:orderId
+        },
+        method:'post',
+        success:(response)=>{
+            alert('item updated')
+            location.reload()
+          
+        }
+
+      })
+  }
+</script>
